@@ -31,7 +31,7 @@ doc
 const maxWidth = 140;
 const maxHeight = 70;
 
-doc.image('assets/Winners.png', doc.page.width / 2 - maxWidth / 2, 60, {
+doc.image('assets/winners.png', doc.page.width / 2 - maxWidth / 2, 60, {
   fit: [maxWidth, maxHeight],
   align: 'center',
 });
@@ -103,34 +103,9 @@ doc.moveDown();
 
 doc.lineWidth(1);
 
-// Validation link
-const link =
-  'https://validate-your-certification.hello/validation-code-here';
-
-const linkWidth = doc.widthOfString(link);
-const linkHeight = doc.currentLineHeight();
-
-doc
-  .font('fonts/NotoSansJP-Light.otf')
-  .fontSize(10)
-  .fill('#021c27')
-  .text(link, {
-    align: 'center',
-    link,
-  });
-
-
-doc.underline(
-  doc.page.width / 2 - linkWidth / 2,
-  448,
-  linkWidth,
-  linkHeight,
-  { color: '#021c27' },
-);
-
 // Signatures
 const lineSize = 174;
-const signatureHeight = 380;
+const signatureHeight = 390;
 
 doc.fillAndStroke('#021c27');
 doc.strokeOpacity(0.2);
@@ -228,17 +203,50 @@ doc
     align: 'center',
   });
 
-doc.text('', 0, 0);
+doc.moveDown();
+doc.moveDown();
+doc.moveDown();
+doc.moveDown();
 
-doc.moveDown();
-doc.moveDown();
-doc.moveDown();
-doc.moveDown();
+// Validation link
+const link =
+  'https://validate-your-certification.hello/validation-code-here';
+
+const linkWidth = doc.widthOfString(link);
+const linkHeight = doc.currentLineHeight();
+
+doc
+  .underline(
+    doc.page.width / 2 - linkWidth / 2,
+    448,
+    linkWidth,
+    linkHeight,
+    { color: '#021c27' },
+  )
+  .link(
+    doc.page.width / 2 - linkWidth / 2,
+    448,
+    linkWidth,
+    linkHeight,
+    link,
+  );
+
+doc
+  .font('fonts/NotoSansJP-Light.otf')
+  .fontSize(10)
+  .fill('#021c27')
+  .text(
+    link,
+    doc.page.width / 2 - linkWidth / 2,
+    448,
+    linkWidth,
+    linkHeight
+  );
 
 // Footer
 const bottomHeight = doc.page.height - 100;
 
-doc.image('assets/Qr.png', doc.page.width / 2 - 30, bottomHeight, {
+doc.image('assets/qr.png', doc.page.width / 2 - 30, bottomHeight, {
   fit: [60, 60],
 });
 
