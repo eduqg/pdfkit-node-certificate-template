@@ -1,6 +1,6 @@
-## Certification template for PDFKit in Node.js
+## Certificate template for PDFKit in Node.js
 
-I was learning about how to make pdf certifications and created this template to help other developers.
+I was learning about how to make pdf certificates and created this template to help other developers.
 
 <img src="./assets/example.png">
 

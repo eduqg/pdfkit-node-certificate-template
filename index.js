@@ -6,6 +6,13 @@ const doc = new PDFDocument({
   size: 'A4',
 });
 
+// Helper to move to next line
+function jumpLine(doc, lines) {
+  for (let index = 0; index < lines; index++) {
+    doc.moveDown();
+  }
+}
+
 doc.pipe(fs.createWriteStream('output.pdf'));
 
 doc.rect(0, 0, doc.page.width, doc.page.height).fill('#fff');
@@ -36,11 +43,7 @@ doc.image('assets/winners.png', doc.page.width / 2 - maxWidth / 2, 60, {
   align: 'center',
 });
 
-doc.moveDown();
-doc.moveDown();
-doc.moveDown();
-doc.moveDown();
-doc.moveDown();
+jumpLine(doc, 5)
 
 doc
   .font('fonts/NotoSansJP-Light.otf')
@@ -50,19 +53,18 @@ doc
     align: 'center',
   });
 
-doc.moveDown();
-doc.moveDown();
+jumpLine(doc, 2)
 
 // Content
 doc
   .font('fonts/NotoSansJP-Regular.otf')
   .fontSize(16)
   .fill('#021c27')
-  .text('CERTIFICATE OF COMPLETITION', {
+  .text('CERTIFICATE OF COMPLETION', {
     align: 'center',
   });
 
-doc.moveDown();
+jumpLine(doc, 1)
 
 doc
   .font('fonts/NotoSansJP-Light.otf')
@@ -72,8 +74,7 @@ doc
     align: 'center',
   });
 
-doc.moveDown();
-doc.moveDown();
+jumpLine(doc, 2)
 
 doc
   .font('fonts/NotoSansJP-Bold.otf')
@@ -83,7 +84,7 @@ doc
     align: 'center',
   });
 
-doc.moveDown();
+jumpLine(doc, 1)
 
 doc
   .font('fonts/NotoSansJP-Light.otf')
@@ -93,13 +94,7 @@ doc
     align: 'center',
   });
 
-doc.moveDown();
-doc.moveDown();
-doc.moveDown();
-doc.moveDown();
-doc.moveDown();
-doc.moveDown();
-doc.moveDown();
+jumpLine(doc, 7)
 
 doc.lineWidth(1);
 
@@ -117,15 +112,15 @@ doc
   .lineTo(endLine1, signatureHeight)
   .stroke();
 
-const startLine2 = 128 + lineSize + 32;
-const endLine2 = 128 + lineSize + 32 + lineSize;
+const startLine2 = endLine1 + 32;
+const endLine2 = startLine2 + lineSize;
 doc
   .moveTo(startLine2, signatureHeight)
   .lineTo(endLine2, signatureHeight)
   .stroke();
 
-const startLine3 = 128 + lineSize + 32 + lineSize + 32;
-const endLine3 = 128 + lineSize + 32 + lineSize + 32 + lineSize;
+const startLine3 = endLine2 + 32;
+const endLine3 = startLine3 + lineSize;
 doc
   .moveTo(startLine3, signatureHeight)
   .lineTo(endLine3, signatureHeight)
@@ -203,14 +198,11 @@ doc
     align: 'center',
   });
 
-doc.moveDown();
-doc.moveDown();
-doc.moveDown();
-doc.moveDown();
+jumpLine(doc, 4);
 
 // Validation link
 const link =
-  'https://validate-your-certification.hello/validation-code-here';
+  'https://validate-your-certificate.hello/validation-code-here';
 
 const linkWidth = doc.widthOfString(link);
 const linkHeight = doc.currentLineHeight();
