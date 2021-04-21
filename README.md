@@ -24,7 +24,7 @@ Start the server
 yarn dev
 ```
 
-ou
+or
 
 ```console
 npm run dev
